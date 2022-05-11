@@ -11,7 +11,7 @@ function AddTodoForm() {
       <Row gutter={20}>
         <Col xs={24} sm={24} md={17} lg={19} xl={20}>
           <Form.Item
-            name={"name"}
+            name="name"
             rules={[{ required: true, message: "This field is required." }]}
           >
             <Input placeholder="What needs to be done?" autoComplete="off" />

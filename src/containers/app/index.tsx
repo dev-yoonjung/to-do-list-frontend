@@ -1,11 +1,19 @@
 import { HashRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { Store } from "redux";
 import Routes from "routes";
 
-function App() {
+interface IAppProps {
+  store: Store;
+}
+
+function App({ store }: IAppProps) {
   return (
-    <HashRouter>
-      <Routes />
-    </HashRouter>
+    <Provider store={store}>
+      <HashRouter>
+        <Routes />
+      </HashRouter>
+    </Provider>
   );
 }
 
