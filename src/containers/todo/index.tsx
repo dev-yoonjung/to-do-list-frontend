@@ -1,3 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ITodo } from "store/todo/models/todo.model";
+import { RootState } from "store/todo/reducers";
+import { getTodoList } from "store/todo/actions";
+
 import { Col, Card, PageHeader } from "antd";
 import AddTodoForm from "components/AddTodoForm";
 import TodoList from "components/TodoList";
@@ -5,6 +11,15 @@ import TodoList from "components/TodoList";
 import TodoStyle from "styles/TodoStyle";
 
 function TodoContainer() {
+  const dispatch = useDispatch();
+  const todos: ITodo[] | undefined = useSelector(
+    (state: RootState) => state.todo
+  )?.todos;
+
+  useEffect(() => {
+    dispatch(getTodoList());
+  }, []);
+
   return (
     <TodoStyle
       justify="center"

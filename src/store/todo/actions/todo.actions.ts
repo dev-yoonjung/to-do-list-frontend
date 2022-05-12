@@ -16,6 +16,19 @@ export function addTodoSuccess(todo: ITodo): TodoActionTypes {
   };
 }
 
+export function getTodoList(): TodoActionTypes {
+  return {
+    type: TODO_ACTION_TYPES.GET_TODO_LIST,
+  };
+}
+
+export function getTodoListSuccess(todoList: ITodo[]): TodoActionTypes {
+  return {
+    type: TODO_ACTION_TYPES.GET_TODO_LIST_SUCCESS,
+    payload: todoList,
+  };
+}
+
 export function toggleTodoStatus(todo: ITodo): TodoActionTypes {
   return {
     type: TODO_ACTION_TYPES.TOGGLE_TODO_STATUS,
