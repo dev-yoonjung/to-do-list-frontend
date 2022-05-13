@@ -1,5 +1,5 @@
 import { ITodo } from "store/todo/models/todo.model";
-import { TodoActionTypes } from "./todo.actions.types";
+import { TodoActionTypes, IGetTodoAction } from "./todo.actions.types";
 import * as TODO_ACTION_TYPES from "store/todo/constants";
 
 export function addTodo(todo: ITodo): TodoActionTypes {
@@ -16,7 +16,7 @@ export function addTodoSuccess(todo: ITodo): TodoActionTypes {
   };
 }
 
-export function getTodoList(): TodoActionTypes {
+export function getTodoList(): IGetTodoAction {
   return {
     type: TODO_ACTION_TYPES.GET_TODO_LIST,
   };

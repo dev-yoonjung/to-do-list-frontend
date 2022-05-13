@@ -1,13 +1,27 @@
-import { Form, Row, Col, Button, Input } from "antd";
+import { useDispatch } from "react-redux";
+import { addTodo } from "store/todo/actions";
+
+import { Form, Row, Col, Button, Input, message } from "antd";
 import { PlusCircleFilled } from "@ant-design/icons";
 
 import FormStyle from "styles/FormStyle";
 
 function AddTodoForm() {
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
 
+  const onFinish = () => {
+    dispatch(addTodo({
+      name: form.getFieldValue('name'),
+      completed: false
+    }));
+    message.success('Todo added!');
+
+    form.resetFields();
+  }
+
   return (
-    <FormStyle form={form} layout="horizontal" className="todo-form">
+    <FormStyle form={form} onFinish={onFinish} layout="horizontal" className="todo-form">
       <Row gutter={20}>
         <Col xs={24} sm={24} md={17} lg={19} xl={20}>
           <Form.Item

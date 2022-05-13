@@ -15,7 +15,9 @@ export const initialState: ITodoReducerInterface = {
 export const todoReducer = (state = initialState, action: TodoActionTypes) => {
   switch (action?.type) {
     case TODO_ACTION_TYPES.ADD_TODO_SUCCESS:
-      return;
+      return produce(state, (draft) => {
+        draft.todos.push(action.payload);
+      });
     case TODO_ACTION_TYPES.GET_TODO_LIST_SUCCESS:
       return produce(state, (draft) => {
         draft.todos = action.payload;

@@ -4,7 +4,15 @@ import * as actions from "store/todo/actions";
 import { TodoActionTypes } from "store/todo/actions/todo.actions.types";
 import * as TODO_ACTION_TYPES from "store/todo/constants";
 
-function* addTodo(action: TodoActionTypes) {}
+function* addTodo(action: TodoActionTypes) {
+  const { data } = yield call(
+    axios.post,
+    "http://localhost:8080/api/todo/main",
+    action.payload
+  );
+
+  yield put(actions.addTodoSuccess(data));
+}
 
 function* getTodoList() {
   const { data } = yield call(axios.get, "http://localhost:8080/api/todo/main");
