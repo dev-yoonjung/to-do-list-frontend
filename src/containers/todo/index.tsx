@@ -58,7 +58,7 @@ function TodoContainer() {
         xl={{ span: 18 }}
       >
         <Card title="Todo List">
-          <TodoList />
+          <TodoList todos={todos} />
         </Card>
       </Col>
     </TodoStyle>

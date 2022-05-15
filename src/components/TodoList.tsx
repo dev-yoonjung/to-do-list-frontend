@@ -1,13 +1,20 @@
+import { ITodo } from "store/todo/models/todo.model";
+
 import { List } from "antd";
 import TodoItem from "components/TodoItem";
 
-function TodoList() {
+interface ITodoListProps {
+  todos: ITodo[] | undefined;
+}
+
+function TodoList({ todos = [] }: ITodoListProps) {
   return (
     <List
       locale={{
         emptyText: "There's nothing to do :(",
       }}
-      renderItem={() => <TodoItem />}
+      dataSource={todos}
+      renderItem={(todo) => <TodoItem todo={todo} />}
       pagination={{
         position: "bottom",
         pageSize: 10,

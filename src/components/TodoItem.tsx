@@ -1,16 +1,25 @@
+import { ITodo } from "store/todo/models/todo.model";
+
 import { Tooltip, Tag, Button, Popconfirm, Switch } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 import ItemStyle from "styles/ItemStyle";
 
-function TodoItem() {
+interface ITodoItemProps {
+  todo: ITodo;
+}
+
+function TodoItem({ todo }: ITodoItemProps) {
   return (
     <ItemStyle
       actions={[
-        <Tooltip>
+        <Tooltip
+          title={todo.completed ? "Mark as uncompleted" : "Mark as completed"}
+        >
           <Switch
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
+            defaultChecked={todo.completed}
           />
         </Tooltip>,
         <Popconfirm title="Are you sure you want to delete?">
@@ -20,8 +29,13 @@ function TodoItem() {
         </Popconfirm>,
       ]}
       className="list-item"
+      key={todo.id}
     >
-      <div className="todo-item"></div>
+      <div className="todo-item">
+        <Tag color={todo.completed ? "cyan" : "red"} className="todo-tag">
+          {todo.name}
+        </Tag>
+      </div>
     </ItemStyle>
   );
 }
