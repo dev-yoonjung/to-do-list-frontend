@@ -20,9 +20,24 @@ function* getTodoList() {
   yield put(actions.getTodoListSuccess(data));
 }
 
-function* toggleTodoStatus(action: TodoActionTypes) {}
+function* toggleTodoStatus(action: TodoActionTypes) {
+  const { data } = yield call(
+    axios.put,
+    `http://localhost:8080/api/todo/main/${action.payload.id}`,
+    action.payload
+  );
 
-function* removeTodo(action: TodoActionTypes) {}
+  yield put(actions.toggleTodoStatusSuccess(data));
+}
+
+function* removeTodo(action: TodoActionTypes) {
+  const { data } = yield call(
+    axios.delete,
+    `http://localhost:8080/api/todo/main/${action.payload}`
+  );
+
+  yield put(actions.removeTodoSuccess(data));
+}
 
 export function* todoSaga() {
   yield takeLatest(TODO_ACTION_TYPES.ADD_TODO, addTodo);

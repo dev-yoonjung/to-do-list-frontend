@@ -15,7 +15,7 @@ export interface IGetTodoAction {
   type: typeof TODO_ACTION_TYPES.GET_TODO_LIST;
 }
 
-interface IGetTodoSuccessAction {
+export interface IGetTodoSuccessAction {
   type: typeof TODO_ACTION_TYPES.GET_TODO_LIST_SUCCESS;
   payload: ITodo[];
 }
@@ -30,7 +30,7 @@ interface IToggleTodoSuccessAction {
   payload: ITodo;
 }
 
-interface IRemoveTodoAction {
+export interface IRemoveTodoAction {
   type: typeof TODO_ACTION_TYPES.REMOVE_TODO;
   payload: number;
 }
@@ -43,8 +43,6 @@ interface IRemoveTodoSuccessAction {
 export type TodoActionTypes =
   | IAddTodoAction
   | IAddTodoSuccessAction
-  | IGetTodoSuccessAction
-  | IRemoveTodoAction
   | IRemoveTodoSuccessAction
   | IToggleTodoAction
   | IToggleTodoSuccessAction;

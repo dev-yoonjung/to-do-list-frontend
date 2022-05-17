@@ -1,6 +1,8 @@
+import { useDispatch } from "react-redux";
+import { toggleTodoStatus, removeTodo } from "store/todo/actions";
 import { ITodo } from "store/todo/models/todo.model";
 
-import { Tooltip, Tag, Button, Popconfirm, Switch } from "antd";
+import { Tooltip, Tag, Button, Popconfirm, Switch, message } from "antd";
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 import ItemStyle from "styles/ItemStyle";
@@ -10,6 +12,22 @@ interface ITodoItemProps {
 }
 
 function TodoItem({ todo }: ITodoItemProps) {
+  const dispatch = useDispatch();
+
+  const onTodoRemoval = (): void => {
+    if (todo.id) {
+      dispatch(removeTodo(todo.id));
+      message.warn("Todo removed!");
+    }
+  };
+
+  const onTodoToggle = (): void => {
+    if (todo.id) {
+      dispatch(toggleTodoStatus({ ...todo, completed: !todo.completed }));
+      message.info("Todo state updated!");
+    }
+  };
+
   return (
     <ItemStyle
       actions={[
@@ -19,10 +37,14 @@ function TodoItem({ todo }: ITodoItemProps) {
           <Switch
             checkedChildren={<CheckOutlined />}
             unCheckedChildren={<CloseOutlined />}
+            onChange={onTodoToggle}
             defaultChecked={todo.completed}
           />
         </Tooltip>,
-        <Popconfirm title="Are you sure you want to delete?">
+        <Popconfirm
+          title="Are you sure you want to delete?"
+          onConfirm={onTodoRemoval}
+        >
           <Button className="remove-todo-button" type="primary" danger>
             X
           </Button>
