@@ -40,6 +40,10 @@ interface IRemoveTodoSuccessAction {
   payload: ITodo;
 }
 
+export interface IFailedAction {
+  type: typeof TODO_ACTION_TYPES.FAILED;
+}
+
 export type TodoActionTypes =
   | IAddTodoAction
   | IAddTodoSuccessAction

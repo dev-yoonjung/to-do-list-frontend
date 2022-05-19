@@ -4,6 +4,7 @@ import {
   IGetTodoAction,
   IGetTodoSuccessAction,
   IRemoveTodoAction,
+  IFailedAction,
 } from "./todo.actions.types";
 import * as TODO_ACTION_TYPES from "store/todo/constants";
 
@@ -59,5 +60,11 @@ export function removeTodoSuccess(todo: ITodo): TodoActionTypes {
   return {
     type: TODO_ACTION_TYPES.REMOVE_TODO_SUCCESS,
     payload: todo,
+  };
+}
+
+export function failed(): IFailedAction {
+  return {
+    type: TODO_ACTION_TYPES.FAILED,
   };
 }
